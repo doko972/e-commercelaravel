@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ProductFormRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -25,7 +26,8 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        return view('products/create');
+        $categories = Category::all();
+        return view('products/create', ['categories' => $categories] );
     }
 
     public function edit($id): View
