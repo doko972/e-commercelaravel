@@ -12,6 +12,39 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
+
+    public function load()
+    {
+        $filePath = __DIR__ . "/products.json";
+        $fileContent = file_get_contents($filePath);
+
+        $products = json_decode($fileContent, true);
+
+        $newProducts = [];
+        foreach ($products as $key => $product) {
+            $imageUrls = array_map(function($imageUrls){
+                return "images/" . $imageUrls;
+            }, $product["imageUrls"]);
+            $newProduct = new Product();
+            $newProduct->name = $product["name"];
+            $newProduct->description = $product["description"];
+            $newProduct->moreDescription = $product["more_description"];
+            $newProduct->additionnalInfos = $product["more_description"];
+            $newProduct->soldePrice = $product["solde_price"];
+            $newProduct->regularPrice = $product["regular_price"];
+            $newProduct->imageUrls = json_encode($product["imageUrls"]);
+            $newProduct->isAvailable = $product["isAvailable"];
+            $newProduct->isBestSeller = $product["isBestSeller"];
+            $newProduct->isNewArrival = $product["isNewArrival"];
+            $newProduct->isFeatured = $product["isFeatured"];
+            $newProduct->isSpecialOffer = $product["isSpecialOffer"];
+            $newProduct->currency = $product["currency"];
+
+            $newProducts[] = $newProduct;
+        }
+
+        dd($newProducts);
+    }
     public function index(): View
     {
         $products = Product::orderBy('created_at', 'desc')->paginate(5);
@@ -27,17 +60,19 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::all();
-        return view('products/create', ['categories' => $categories] );
+        return view('products/create', ['categories' => $categories]);
     }
 
     public function edit($id): View
     {
         $product = Product::findOrFail($id);
-        return view('products/edit', ['product' => $product]);
+        $categories = Category::all();
+        return view('products/edit', ['product' => $product, 'categories' => $categories]);
     }
 
     public function store(ProductFormRequest $req): RedirectResponse
     {
+        $categories = $req->validated('$categories');
         $data = $req->validated();
 
         // Convertir les booléens en 0 ou 1
@@ -52,11 +87,14 @@ class ProductController extends Controller
         }
 
         $product = Product::create($data);
+        $product->categories()->sync($categories);
+
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 
     public function update(Product $product, ProductFormRequest $req)
     {
+        $categories = $req->validated('categories');
         $data = $req->validated();
 
         // Convertir les booléens en 0 ou 1
@@ -83,6 +121,8 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+
+        $product->categories()->sync($categories);
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 

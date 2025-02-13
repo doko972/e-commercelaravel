@@ -40,7 +40,7 @@ class ProductFormRequest extends FormRequest
 			'isNewArrival' => $isRequired.'in:true,false|nullable',
 			'isFeatured' => $isRequired.'in:true,false|nullable',
 			'isSpecialOffer' => $isRequired.'in:true,false|nullable',
-            'categories' => $isRequired.'exist:categories,id'
+            'categories' => $isRequired.'array|exists:categories,id'
 			
         ];
     }
