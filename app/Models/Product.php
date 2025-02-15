@@ -7,14 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+	use HasFactory;
 	protected $fillable = ['name', 'slug', 'description', 'moreDescription', 'additionnalInfos', 'stock', 'soldePrice', 'regularPrice', 'imageUrls', 'brand', 'isAvailable', 'isBestSeller', 'isNewArrival', 'isFeatured', 'isSpecialOffer'];
 
 	public function categories()
 	{
-		
+
 		return $this->belongsToMany(\App\Models\Category::class);
-	
+
+	}
+	public function imageUrls()
+	{
+		return json_decode($this->imageUrls, true) ?? [];
 	}
 
 
