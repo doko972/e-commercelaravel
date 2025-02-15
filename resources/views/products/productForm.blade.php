@@ -135,19 +135,19 @@
                 @enderror
             </div>
             <div class="mb-3 d-flex gap-2">
-                <label for="isAvaible" class="form-label">IsAvaible</label>
+                <label for="isAvailable" class="form-label">isAvailable</label>
                 <div class="form-check form-switch">
-                    <input name="isAvaible" id="isAvaible" value="true" data-bs-toggle="toggle" {{ old('isAvaible', isset($product) && $product->isAvaible == 'true' ? 'checked' : '') }} class="form-check-input"
+                    <input name="isAvailable" id="isAvailable" value="true" data-bs-toggle="toggle" {{ old('isAvailable', isset($product) && $product->isAvailable == 'true' ? 'checked' : '') }} class="form-check-input"
                         type="checkbox" role="switch" />
                 </div>
-                {{-- <select class="form-control" name="isAvaible" id="isAvaible">
-                    <option value="true" {{ old('isAvaible', isset($product) && $product->isAvaible == 'true' ?
+                {{-- <select class="form-control" name="isAvailable" id="isAvailable">
+                    <option value="true" {{ old('isAvailable', isset($product) && $product->isAvailable == 'true' ?
                         'selected' : '') }}>Yes</option>
-                    <option value="false" {{ old('isAvaible', isset($product) && $product->isAvaible == 'false' ?
+                    <option value="false" {{ old('isAvailable', isset($product) && $product->isAvailable == 'false' ?
                         'selected' : '') }}>No</option>
                 </select> --}}
 
-                @error('isAvaible')
+                @error('isAvailable')
                     <div class="error text-danger">
                         {{ $message }}
                     </div>

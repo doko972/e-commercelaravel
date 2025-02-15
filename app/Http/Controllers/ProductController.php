@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ProductFormRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\Category;
 
 class ProductController extends Controller
@@ -15,35 +16,41 @@ class ProductController extends Controller
 
     public function load()
     {
-        $filePath = __DIR__ . "/products.json";
-        $fileContent = file_get_contents($filePath);
+        if (Product::all()->count() < 5) {
+            $filePath = __DIR__ . "/products.json";
+            $fileContent = file_get_contents($filePath);
 
-        $products = json_decode($fileContent, true);
+            $products = json_decode($fileContent, true);
 
-        $newProducts = [];
-        foreach ($products as $key => $product) {
-            $imageUrls = array_map(function($imageUrls){
-                return "images/" . $imageUrls;
-            }, $product["imageUrls"]);
-            $newProduct = new Product();
-            $newProduct->name = $product["name"];
-            $newProduct->description = $product["description"];
-            $newProduct->moreDescription = $product["more_description"];
-            $newProduct->additionnalInfos = $product["more_description"];
-            $newProduct->soldePrice = $product["solde_price"];
-            $newProduct->regularPrice = $product["regular_price"];
-            $newProduct->imageUrls = json_encode($product["imageUrls"]);
-            $newProduct->isAvailable = $product["isAvailable"];
-            $newProduct->isBestSeller = $product["isBestSeller"];
-            $newProduct->isNewArrival = $product["isNewArrival"];
-            $newProduct->isFeatured = $product["isFeatured"];
-            $newProduct->isSpecialOffer = $product["isSpecialOffer"];
-            $newProduct->currency = $product["currency"];
+            foreach ($products as $key => $product) {
+                $imageUrls = array_map(function ($imageUrls) {
+                    return "images/" . $imageUrls;
+                }, $product["imageUrls"]);
+                $newProduct = new Product();
+                $newProduct->name = $product["name"];
+                $newProduct->slug = Str::slug($product["name"].' '.$key);
+                $newProduct->description = $product["description"];
+                $newProduct->moreDescription = $product["more_description"];
+                $newProduct->additionnalInfos = $product["more_description"];
+                $newProduct->stock = rand(200, 600);
+                $newProduct->soldePrice = $product["solde_price"];
+                $newProduct->regularPrice = $product["regular_price"];
+                $newProduct->imageUrls = json_encode($product["imageUrls"]);
+                $newProduct->isAvailable = $product["isAvailable"];
+                $newProduct->isBestSeller = $product["isBestSeller"];
+                $newProduct->isNewArrival = $product["isNewArrival"];
+                $newProduct->isFeatured = $product["isFeatured"];
+                $newProduct->isSpecialOffer = $product["isSpecialOffer"];
 
-            $newProducts[] = $newProduct;
+                $newProduct->save();
+            }
+            return [
+                'result' => "created"
+            ];
         }
-
-        dd($newProducts);
+        return [
+            'result' => "error"
+        ];
     }
     public function index(): View
     {
@@ -76,7 +83,7 @@ class ProductController extends Controller
         $data = $req->validated();
 
         // Convertir les booléens en 0 ou 1
-        $data['isAvaible'] = $req->boolean('isAvaible');
+        $data['isAvailable'] = $req->boolean('isAvailable');
         $data['isBestSeller'] = $req->boolean('isBestSeller');
         $data['isNewArrival'] = $req->boolean('isNewArrival');
         $data['isFeatured'] = $req->boolean('isFeatured');
@@ -98,7 +105,7 @@ class ProductController extends Controller
         $data = $req->validated();
 
         // Convertir les booléens en 0 ou 1
-        $data['isAvaible'] = $req->boolean('isAvaible');
+        $data['isAvailable'] = $req->boolean('isAvailable');
         $data['isBestSeller'] = $req->boolean('isBestSeller');
         $data['isNewArrival'] = $req->boolean('isNewArrival');
         $data['isFeatured'] = $req->boolean('isFeatured');

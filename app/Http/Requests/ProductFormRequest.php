@@ -35,7 +35,7 @@ class ProductFormRequest extends FormRequest
 			'imageUrls' => $isRequired.'array|max:5',
 			'imageUrls.*' => 'image|mimes:webp,jpeg,png,jpg,gif|max:2048',
 			'brand' => $isRequired.'string',
-			'isAvaible' => $isRequired.'in:true,false|nullable',
+			'isAvailable' => $isRequired.'in:true,false|nullable',
 			'isBestSeller' => $isRequired.'in:true,false|nullable',
 			'isNewArrival' => $isRequired.'in:true,false|nullable',
 			'isFeatured' => $isRequired.'in:true,false|nullable',
@@ -48,7 +48,7 @@ class ProductFormRequest extends FormRequest
     {
         $this->merge([
             'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-			'isAvaible' => $this->input('isAvaible') ? 'true' : 'false',
+			'isAvailable' => $this->input('isAvailable') ? 'true' : 'false',
 			'isBestSeller' => $this->input('isBestSeller') ? 'true' : 'false',
 			'isNewArrival' => $this->input('isNewArrival') ? 'true' : 'false',
 			'isFeatured' => $this->input('isFeatured') ? 'true' : 'false',
