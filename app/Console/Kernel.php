@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use EsperoSoft\Artisan\Console\Commands\MakeCrudCommand;
+use EsperoSoft\Artisan\Console\Commands\MakeEntityCommand;
+use EsperoSoft\Artisan\Console\Commands\MakeServiceCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -20,7 +23,14 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
+
+        // Registering the MakeEntityCommand as a ClosureCommand
+        $this->getArtisan()->add(new MakeEntityCommand());
+        // Registering the MakeCrudCommand as a ClosureCommand
+        $this->getArtisan()->add(new MakeCrudCommand());
+        // Registering the MakeServiceCommand as a ClosureCommand
+        $this->getArtisan()->add(new MakeServiceCommand());
 
         require base_path('routes/console.php');
     }
