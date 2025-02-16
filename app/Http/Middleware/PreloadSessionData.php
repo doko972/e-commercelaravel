@@ -18,13 +18,13 @@ class PreloadSessionData
     public function handle(Request $request, Closure $next): Response
     {
         $pages = [
-            'headPages' => Page::where("isHead", 1)->get()->toArray(), // ✅ Convertir directement la collection en tableau
+            'headPages' => Page::where("isHead", 1)->get()->toArray(),
             'footPages' => Page::where("isFoot", 1)->get()->toArray(),
         ];
-    
+        // dd($pages);
         Session::put('pages', $pages);
-    
-        // dd(Session::get('pages')); // DEBUG : Vérifier que la session contient bien les pages
+
+        // dd(session()->get('pages'));
         return $next($request);
     }
 }

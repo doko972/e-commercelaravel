@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Banner;
 use App\Models\Product;
+use App\Models\Page;
 use App\Models\Collection;
 
 
@@ -27,11 +28,17 @@ class HomeController extends Controller
             [
                 'banners' => $banners,
                 'collections' => $Collections,
-                'featured'=> $featured,
-                'specialOffer'=> $specialOffers,
-                'bestSellers'=> $bestSellers,
-                'newArrival'=> $newArrivals
+                'featured' => $featured,
+                'specialOffer' => $specialOffers,
+                'bestSellers' => $bestSellers,
+                'newArrival' => $newArrivals
             ]
         );
+    }
+
+    public function showPage(string $slug): view
+    {
+        $page = Page::where('slug', $slug)->firstOrFail();
+        return view('doko.page', ['page' => $page]);
     }
 }

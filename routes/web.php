@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware();
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('preload.page');
+Route::get('/page/{page}', [HomeController::class, 'showPage'])->name('page')->middleware('preload.page');
 
 // Route::get('/load', [ProductController::class, 'load'])->name('load');
 

@@ -64,19 +64,22 @@
                                 Users
                             </a>
                         </li>
-                    <li class="nav-item">
-    <a class="nav-link" href="{{route('admin.banner.index')}}">
-        Banners
-    </a>
-</li><li class="nav-item">
-    <a class="nav-link" href="{{route('admin.collection.index')}}">
-        Collections
-    </a>
-</li><li class="nav-item">
-    <a class="nav-link" href="{{route('admin.page.index')}}">
-        Pages
-    </a>
-</li></ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.banner.index')}}">
+                                Banners
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.collection.index')}}">
+                                Collections
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.page.index')}}">
+                                Gestion des Pages
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 

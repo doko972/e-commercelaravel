@@ -66,7 +66,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg"><a routerlink="/" class="navbar-brand" ng-reflect-router-link="/"
                     href="/">
-                    <h2>Jstore</h2>
+                    <h2>Doko</h2>
                 </a><button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-expanded="false" class="navbar-toggler collapsed"><span
                         class="ion-android-menu"></span></button>
@@ -78,20 +78,15 @@
                                 class="dropdown-toggle nav-link active" aria-expanded="false">Pages</a>
                             <div class="dropdown-menu">
                                 <ul>
-                                    @if(!empty($pages) && isset($pages['headPages']) && is_array($pages['headPages']) && count($pages['headPages']) > 0)
-                                        @foreach ($pages['headPages'] as $page)
-                                            <li>
-                                                <a class="dropdown-item nav-link nav_item" href="/{{ $page['slug'] }}">
-                                                    {{ $page['title'] }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    @else
+                                    @foreach (session()->get('pages')['headPages'] as $page)
                                         <li>
-                                            <p class="dropdown-item">Aucune page disponible</p>
-                                        </li>
-                                    @endif
+                                            <a class="dropdown-item nav-link nav_item"
+                                                href="{{ route('page', ['page' => $page['slug']]) }}">
 
+                                                {{ $page['title'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </li>
