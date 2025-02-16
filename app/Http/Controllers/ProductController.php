@@ -13,7 +13,6 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-
     public function load()
     {
         if (Product::all()->count() < 5) {
@@ -23,98 +22,109 @@ class ProductController extends Controller
             $products = json_decode($fileContent, true);
 
             foreach ($products as $key => $product) {
-                $imageUrls = array_map(function ($imageUrls) {
-                    return "images/" . $imageUrls;
-                }, $product["imageUrls"]);
-                $newProduct = new Product();
-                $newProduct->name = $product["name"];
-                $newProduct->slug = Str::slug($product["name"].' '.$key);
-                $newProduct->description = $product["description"];
-                $newProduct->moreDescription = $product["more_description"];
-                $newProduct->additionnalInfos = $product["more_description"];
-                $newProduct->stock = rand(200, 600);
-                $newProduct->soldePrice = $product["solde_price"];
-                $newProduct->regularPrice = $product["regular_price"];
-                $newProduct->imageUrls = json_encode($product["imageUrls"]);
-                $newProduct->isAvailable = $product["isAvailable"];
-                $newProduct->isBestSeller = $product["isBestSeller"];
-                $newProduct->isNewArrival = $product["isNewArrival"];
-                $newProduct->isFeatured = $product["isFeatured"];
-                $newProduct->isSpecialOffer = $product["isSpecialOffer"];
+                $imageUrls = array_map(fn ($image) => "images/" . $image, $product["imageUrls"]);
 
-                $newProduct->save();
+                Product::create([
+                    'name' => $product["name"],
+                    'slug' => Str::slug($product["name"] . ' ' . $key),
+                    'description' => $product["description"],
+                    'moreDescription' => $product["more_description"],
+                    'additionnalInfos' => $product["more_description"],
+                    'stock' => rand(200, 600),
+                    'soldePrice' => $product["solde_price"],
+                    'regularPrice' => $product["regular_price"],
+                    'imageUrls' => json_encode($imageUrls),
+                    'isAvailable' => (bool) $product["isAvailable"],
+                    'isBestSeller' => (bool) $product["isBestSeller"],
+                    'isNewArrival' => (bool) $product["isNewArrival"],
+                    'isFeatured' => (bool) $product["isFeatured"],
+                    'isSpecialOffer' => (bool) $product["isSpecialOffer"],
+                ]);
             }
-            return [
-                'result' => "created"
-            ];
+
+            return ['result' => "created"];
         }
-        return [
-            'result' => "error"
-        ];
+
+        return ['result' => "error"];
     }
-    public function index(): View
+
+    public function index(Request $request): View
     {
-        $products = Product::orderBy('created_at', 'desc')->paginate(5);
-        return view('products/index', ['products' => $products]);
+        $query = Product::query();
+
+        // Application des filtres uniquement si la valeur est "1"
+        if ($request->input('is_new_arrival') == 1) {
+            $query->where('isNewArrival', 1);
+        }
+        if ($request->input('is_featured') == 1) {
+            $query->where('isFeatured', 1);
+        }
+        if ($request->input('is_special_offer') == 1) {
+            $query->where('isSpecialOffer', 1);
+        }
+        if ($request->input('is_best_seller') == 1) {
+            $query->where('isBestSeller', 1);
+        }
+
+        $products = $query->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('products.index', compact('products'));
     }
 
     public function show($id): View
     {
         $product = Product::findOrFail($id);
-        return view('products/show', ['product' => $product]);
+        return view('products.show', compact('product'));
     }
 
     public function create(): View
     {
         $categories = Category::all();
-        return view('products/create', ['categories' => $categories]);
+        return view('products.create', compact('categories'));
     }
 
     public function edit($id): View
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
-        return view('products/edit', ['product' => $product, 'categories' => $categories]);
+        return view('products.edit', compact('product', 'categories'));
     }
 
     public function store(ProductFormRequest $req): RedirectResponse
     {
-        $categories = $req->validated('$categories');
         $data = $req->validated();
-
-        // Convertir les booléens en 0 ou 1
-        $data['isAvailable'] = $req->boolean('isAvailable');
-        $data['isBestSeller'] = $req->boolean('isBestSeller');
-        $data['isNewArrival'] = $req->boolean('isNewArrival');
-        $data['isFeatured'] = $req->boolean('isFeatured');
-        $data['isSpecialOffer'] = $req->boolean('isSpecialOffer');
+        
+        // Conversion explicite des booléens
+        $data['isAvailable'] = $req->boolean('isAvailable') ? 1 : 0;
+        $data['isBestSeller'] = $req->boolean('isBestSeller') ? 1 : 0;
+        $data['isNewArrival'] = $req->boolean('isNewArrival') ? 1 : 0;
+        $data['isFeatured'] = $req->boolean('isFeatured') ? 1 : 0;
+        $data['isSpecialOffer'] = $req->boolean('isSpecialOffer') ? 1 : 0;
 
         if ($req->hasFile('imageUrls')) {
             $data['imageUrls'] = json_encode($this->handleImageUpload($req->file('imageUrls')));
         }
 
         $product = Product::create($data);
-        $product->categories()->sync($categories);
+        $product->categories()->sync($req->validated('categories', []));
 
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 
     public function update(Product $product, ProductFormRequest $req)
     {
-        $categories = $req->validated('categories');
         $data = $req->validated();
 
-        // Convertir les booléens en 0 ou 1
-        $data['isAvailable'] = $req->boolean('isAvailable');
-        $data['isBestSeller'] = $req->boolean('isBestSeller');
-        $data['isNewArrival'] = $req->boolean('isNewArrival');
-        $data['isFeatured'] = $req->boolean('isFeatured');
-        $data['isSpecialOffer'] = $req->boolean('isSpecialOffer');
+        // Conversion explicite des booléens
+        $data['isAvailable'] = $req->boolean('isAvailable') ? 1 : 0;
+        $data['isBestSeller'] = $req->boolean('isBestSeller') ? 1 : 0;
+        $data['isNewArrival'] = $req->boolean('isNewArrival') ? 1 : 0;
+        $data['isFeatured'] = $req->boolean('isFeatured') ? 1 : 0;
+        $data['isSpecialOffer'] = $req->boolean('isSpecialOffer') ? 1 : 0;
 
         if ($req->hasFile('imageUrls')) {
             $uploadedImages = $this->handleImageUpload($req->file('imageUrls'));
 
-            // Suppression des anciennes images
             if (!empty($product->imageUrls)) {
                 $oldImages = json_decode($product->imageUrls, true);
                 if (is_array($oldImages)) {
@@ -128,28 +138,32 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+        $product->categories()->sync($req->validated('categories', []));
 
-        $product->categories()->sync($categories);
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 
     public function updateSpeed(Product $product, Request $req)
     {
-        foreach ($req->all() as $key => $value) {
-            $product->update([
-                $key => $value
-            ]);
+        $data = $req->all();
+
+        // Forcer la conversion des booléens
+        foreach (['isAvailable', 'isBestSeller', 'isNewArrival', 'isFeatured', 'isSpecialOffer'] as $field) {
+            if ($req->has($field)) {
+                $data[$field] = $req->boolean($field) ? 1 : 0;
+            }
         }
+
+        $product->update($data);
 
         return [
             'isSuccess' => true,
-            'data' => $req->all()
+            'data' => $data
         ];
     }
 
     public function delete(Product $product)
     {
-        // Suppression des images associées
         if (!empty($product->imageUrls)) {
             $images = json_decode($product->imageUrls, true);
             if (is_array($images)) {
@@ -160,17 +174,15 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        return [
-            'isSuccess' => true
-        ];
+        return ['isSuccess' => true];
     }
 
-    private function handleImageUpload(\Illuminate\Http\UploadedFile|array $images): array
+    private function handleImageUpload($images): array
     {
         $uploadedImages = [];
 
         if (!is_array($images)) {
-            $images = [$images]; // Convertir un fichier unique en tableau
+            $images = [$images]; 
         }
 
         foreach ($images as $image) {

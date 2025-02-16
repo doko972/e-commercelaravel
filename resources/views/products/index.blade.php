@@ -10,6 +10,33 @@
     <div>
         <h3> Products Details</h3>
 
+        <form method="GET" action="{{ route('admin.product.index') }}" class="mb-3">
+    <input type="hidden" name="is_new_arrival" value="0">
+    <input type="hidden" name="is_featured" value="0">
+    <input type="hidden" name="is_special_offer" value="0">
+    <input type="hidden" name="is_best_seller" value="0">
+
+    <label>
+        <input type="checkbox" name="is_new_arrival" value="1"
+               {{ request()->input('is_new_arrival') == 1 ? 'checked' : '' }}> Nouveautés
+    </label>
+    <label>
+        <input type="checkbox" name="is_featured" value="1"
+               {{ request()->input('is_featured') == 1 ? 'checked' : '' }}> Produits en vedette
+    </label>
+    <label>
+        <input type="checkbox" name="is_special_offer" value="1"
+               {{ request()->input('is_special_offer') == 1 ? 'checked' : '' }}> Offres spéciales
+    </label>
+    <label>
+        <input type="checkbox" name="is_best_seller" value="1"
+               {{ request()->input('is_best_seller') == 1 ? 'checked' : '' }}> Meilleures ventes
+    </label>
+    <button type="submit" class="btn btn-primary">Filtrer</button>
+    <a href="{{ route('admin.product.index') }}" class="btn btn-secondary">Réinitialiser</a>
+</form>
+
+
         <div class="d-flex justify-content-end">
             <div class="dropdown m-1">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -19,14 +46,13 @@
                 <div id="columnSelector" class="dropdown-menu"> </div>
             </div>
             <a href="{{ route('admin.product.create') }}" class="btn btn-success m-1">
-
                 Create Product
-
             </a>
         </div>
         <div class="">
             <div class="card-body">
                 <div class="table-responsive">
+
                     <table id="Product" class="table">
                         <thead>
                             <tr>

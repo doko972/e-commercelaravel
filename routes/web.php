@@ -66,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Get Products datas
     Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('product.index');
 
+
     //Show Product by Id
     Route::get('/products/show/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
 

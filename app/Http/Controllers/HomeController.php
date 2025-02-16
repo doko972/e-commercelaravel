@@ -16,10 +16,10 @@ class HomeController extends Controller
         $banners = Banner::all();
         $Collections = Collection::all();
 
-        $newArrivals = Product::where("isNewArrival", "true")->orderBy("id", "desc")->get();
-        $bestSellers = Product::where("isBestSeller", "true")->orderBy("id", "desc")->get();
-        $featured = Product::where("isFeatured", "true")->orderBy("id", "desc")->get();
-        $specialOffers = Product::where("isSpecialOffer", "true")->orderBy("id", "desc")->get();
+        $newArrivals = Product::where("isNewArrival", "1")->orderBy("id", "desc")->get();
+        $bestSellers = Product::where("isBestSeller", "1")->orderBy("id", "desc")->get();
+        $featured = Product::where("isFeatured", "1")->orderBy("id", "desc")->get();
+        $specialOffers = Product::where("isSpecialOffer", "1")->orderBy("id", "desc")->get();
         // dd($newArrivals);
 
         return view(
