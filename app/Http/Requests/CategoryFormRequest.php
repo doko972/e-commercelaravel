@@ -36,7 +36,7 @@ class CategoryFormRequest extends FormRequest
     {
         $this->merge([
             'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-			'isMega' => $this->input('isMega') ? 'true' : 'false',
+			'isMega' => $this->input('isMega') ? 1 : 0,
 			
         ]);
     }

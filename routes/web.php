@@ -197,3 +197,30 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/collections/delete/{collection}', 'App\Http\Controllers\CollectionController@delete')->name('collection.delete');
 
 });
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Pages datas
+    Route::get('/pages', 'App\Http\Controllers\PageController@index')->name('page.index');
+
+    //Show Page by Id
+    Route::get('/pages/show/{id}', 'App\Http\Controllers\PageController@show')->name('page.show');
+
+    //Get Pages by Id
+    Route::get('/pages/create', 'App\Http\Controllers\PageController@create')->name('page.create');
+
+    //Edit Page by Id
+    Route::get('/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->name('page.edit');
+
+    //Save new Page
+    Route::post('/pages/store', 'App\Http\Controllers\PageController@store')->name('page.store');
+
+    //Update One Page
+    Route::put('/pages/update/{page}', 'App\Http\Controllers\PageController@update')->name('page.update');
+
+    //Update One Page Speedly
+    Route::put('/pages/speed/{page}', 'App\Http\Controllers\PageController@updateSpeed')->name('page.update.speed');
+
+    //Delete Page
+    Route::delete('/pages/delete/{page}', 'App\Http\Controllers\PageController@delete')->name('page.delete');
+
+});

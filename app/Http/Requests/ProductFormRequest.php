@@ -48,11 +48,11 @@ class ProductFormRequest extends FormRequest
     {
         $this->merge([
             'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-			'isAvailable' => $this->input('isAvailable') ? 'true' : 'false',
-			'isBestSeller' => $this->input('isBestSeller') ? 'true' : 'false',
-			'isNewArrival' => $this->input('isNewArrival') ? 'true' : 'false',
-			'isFeatured' => $this->input('isFeatured') ? 'true' : 'false',
-			'isSpecialOffer' => $this->input('isSpecialOffer') ? 'true' : 'false',
+			'isAvailable' => $this->input('isAvailable') ? 1 : 0,
+			'isBestSeller' => $this->input('isBestSeller') ? 1 : 0,
+			'isNewArrival' => $this->input('isNewArrival') ? 1 : 0,
+			'isFeatured' => $this->input('isFeatured') ? 1 : 0,
+			'isSpecialOffer' => $this->input('isSpecialOffer') ? 1 : 0,
 			
         ]);
     }
