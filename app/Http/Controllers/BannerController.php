@@ -77,7 +77,7 @@ class BannerController extends Controller
         }
 
         return [
-            'isSuccess' => true,
+            'isSuccess' => 1,
             'data' => $req->all()
         ];
     }
@@ -90,7 +90,7 @@ class BannerController extends Controller
         $banner->delete();
 
         return [
-            'isSuccess' => true
+            'isSuccess' => 1
         ];
     }
 
