@@ -28,9 +28,9 @@
                 {{ $product->name }}</a>
         </h6>
         <div class="product_price">
-            <span class="price">{{ number_format($product->soldePrice, 2, ',', ' ') . '€' }}</span>
-            <del>{{ number_format($product->regularPrice, 2, ',', ' ') . '€' }}</del>
-            <div class="on_sale"><span>35% Off</span></div>
+            <span class="price">{{ $format_price($product->soldePrice)}}</span>
+            <del>{{ $format_price($product->regularPrice)}}</del>
+            <div class="on_sale"><span>{{ $calculateReduction($product) }}% Off</span></div>
         </div>
         <div class="rating_wrap">
             <div class="rating">

@@ -46,9 +46,9 @@
                             <div class="product_description">
                                 <h4 class="product_title"><a href="#">{{ $product->name }}</a></h4>
                                 <div class="product_price">
-                                    <span class="price">{{ number_format($product->soldePrice, 2, ',', ' ') . '€' }}</span>
-                                    <del>{{ number_format($product->regularPrice, 2, ',', ' ') . '€' }}</del>
-                                    <div class="on_sale"><span>35% Off</span></div>
+                                    <span class="price">{{ $format_price($product->soldePrice)}}</span>
+                                    <del>{{ $format_price($product->regularPrice)}}</del>
+                                    <div class="on_sale"><span>{{ $calculateReduction($product) }}% Off</span></div>
                                 </div>
                                 <div class="rating_wrap">
                                     <div class="rating">
@@ -67,7 +67,7 @@
                                         <li><i class="linearicons-bag-dollar"></i>Cash on Delivery available</li>
                                     </ul>
                                 </div>
-                                <div class="pr_switch_wrap"><span class="switch_lable">Color</span>
+                                <!-- <div class="pr_switch_wrap"><span class="switch_lable">Color</span>
                                     <div class="product_color_switch"><span data-color="#87554B" class="active"
                                             style="background-color: rgb(135, 85, 75);"></span><span data-color="#333333"
                                             style="background-color: rgb(51, 51, 51);"></span><span data-color="#DA323F"
@@ -77,7 +77,7 @@
                                     <div class="product_size_switch">
                                         <span>xs</span><span>s</span><span>m</span><span>l</span><span>xl</span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <hr>
                             <div class="cart_extra">

@@ -21,39 +21,38 @@ class ProductFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $isRequired = request()->isMethod("POST") ?"required|": "";
+        $isRequired = request()->isMethod("POST") ? "required|" : "";
         return [
-            //
-            'name' => $isRequired.'string',
-			'slug' => $isRequired.'',
-			'description' => $isRequired.'string',
-			'moreDescription' => $isRequired.'string',
-			'additionnalInfos' => $isRequired.'string',
-			'stock' => $isRequired.'string',
-			'soldePrice' => $isRequired.'string',
-			'regularPrice' => $isRequired.'string',
-			'imageUrls' => $isRequired.'array|max:5',
-			'imageUrls.*' => 'image|mimes:webp,jpeg,png,jpg,gif|max:2048',
-			'brand' => $isRequired.'string',
-			'isAvailable' => $isRequired.'in:true,false|nullable',
-			'isBestSeller' => $isRequired.'in:true,false|nullable',
-			'isNewArrival' => $isRequired.'in:true,false|nullable',
-			'isFeatured' => $isRequired.'in:true,false|nullable',
-			'isSpecialOffer' => $isRequired.'in:true,false|nullable',
-            'categories' => $isRequired.'array|exists:categories,id'
-			
+            'name' => $isRequired . 'string',
+            'slug' => $isRequired . 'string',
+            'description' => $isRequired . 'string',
+            'moreDescription' => $isRequired . 'string',
+            'additionnalInfos' => $isRequired . 'string',
+            'stock' => $isRequired . 'integer|min:0',
+            'soldePrice' => $isRequired . 'numeric|min:0',
+            'regularPrice' => $isRequired . 'numeric|min:0',
+            'imageUrls' => $isRequired . 'array|max:5',
+            'imageUrls.*' => 'image|mimes:webp,jpeg,png,jpg,gif|max:2048',
+            'brand' => $isRequired . 'string',
+            'isAvailable' => 'nullable|boolean',
+            'isBestSeller' => 'nullable|boolean',
+            'isNewArrival' => 'nullable|boolean',
+            'isFeatured' => 'nullable|boolean',
+            'isSpecialOffer' => 'nullable|boolean',
+            'categories' => $isRequired . 'array|exists:categories,id',
         ];
     }
+
     public function prepareForValidation()
     {
         $this->merge([
             'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-			'isAvailable' => $this->input('isAvailable') ? 1 : 0,
-			'isBestSeller' => $this->input('isBestSeller') ? 1 : 0,
-			'isNewArrival' => $this->input('isNewArrival') ? 1 : 0,
-			'isFeatured' => $this->input('isFeatured') ? 1 : 0,
-			'isSpecialOffer' => $this->input('isSpecialOffer') ? 1 : 0,
-			
+            'isAvailable' => filter_var($this->input('isAvailable'), FILTER_VALIDATE_BOOLEAN),
+            'isBestSeller' => filter_var($this->input('isBestSeller'), FILTER_VALIDATE_BOOLEAN),
+            'isNewArrival' => filter_var($this->input('isNewArrival'), FILTER_VALIDATE_BOOLEAN),
+            'isFeatured' => filter_var($this->input('isFeatured'), FILTER_VALIDATE_BOOLEAN),
+            'isSpecialOffer' => filter_var($this->input('isSpecialOffer'), FILTER_VALIDATE_BOOLEAN),
         ]);
     }
+
 }

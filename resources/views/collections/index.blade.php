@@ -112,7 +112,7 @@
             const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
             const response = await fetch('/admin/collections/speed/' + id, {
                 method: 'PUT',
-                body: JSON.stringify(data), // Utilisation de JSON.stringify au lieu de JSON.stringfy
+                body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': csrfToken

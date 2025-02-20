@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Page;
+use App\Models\Product;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,13 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Charger les pages pour toutes les vues
-        $pages = [
-            'headPages' => Page::where("isHead", 1)->get()->toArray(),
-            'footPages' => Page::where("isFoot", 1)->get()->toArray(),
-        ];
+        view()->composer("*", function ($view) {
+            $view->with("calculateReduction", function (Product $product) {
+                return number_format((($product->regularPrice - $product->soldePrice) / $product->regularPrice) * 100,0);
 
-        View::share('pages', $pages);
+            });
+            $view->with("format_price", function ($soldePrice) {
+                return number_format($soldePrice, 2, ',', ' ') . '€' ;
+
+            });
+        });
     }
 
     /**
