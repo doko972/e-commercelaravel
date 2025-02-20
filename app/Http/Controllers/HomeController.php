@@ -41,4 +41,10 @@ class HomeController extends Controller
         $page = Page::where('slug', $slug)->firstOrFail();
         return view('doko.page', ['page' => $page]);
     }
+
+    public function showProduct(string $slug): view
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('doko.product', ['product' => $product]);
+    }
 }

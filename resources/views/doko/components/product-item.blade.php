@@ -1,5 +1,6 @@
 <div class="product">
-    <div class="product_img"><a href="shop-product-detail.html">
+    <div class="product_img">
+        <a href="{{ route('product', ['slug' => $product->slug]) }}">
             @php
                 $imageUrls = $product->imageUrls();
             @endphp
@@ -22,10 +23,12 @@
         </div>
     </div>
     <div class="product_info">
-        <h6 class="product_title"><a ng-reflect-router-link="/,product,bikini-unicolore-cte"
-                href="/product/bikini-unicolore-ctel-shop"> {{ $product->name }}</a></h6>
-        <div class="product_price"><span
-                class="price">{{ number_format($product->soldePrice, 2, ',', ' ') . '€' }}</span>
+        <h6 class="product_title">
+            <a href="{{ route('product', ['slug' => $product->slug]) }}">
+                {{ $product->name }}</a>
+        </h6>
+        <div class="product_price">
+            <span class="price">{{ number_format($product->soldePrice, 2, ',', ' ') . '€' }}</span>
             <del>{{ number_format($product->regularPrice, 2, ',', ' ') . '€' }}</del>
             <div class="on_sale"><span>35% Off</span></div>
         </div>
