@@ -40,6 +40,7 @@ class ProductFormRequest extends FormRequest
             'isFeatured' => 'nullable|boolean',
             'isSpecialOffer' => 'nullable|boolean',
             'categories' => $isRequired . 'array|exists:categories,id',
+            'tags' => 'array|exists:tags,id',
         ];
     }
 

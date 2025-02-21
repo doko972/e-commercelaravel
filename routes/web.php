@@ -226,3 +226,30 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/pages/delete/{page}', 'App\Http\Controllers\PageController@delete')->name('page.delete');
 
 });
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Tags datas
+    Route::get('/tags', 'App\Http\Controllers\TagController@index')->name('tag.index');
+
+    //Show Tag by Id
+    Route::get('/tags/show/{id}', 'App\Http\Controllers\TagController@show')->name('tag.show');
+
+    //Get Tags by Id
+    Route::get('/tags/create', 'App\Http\Controllers\TagController@create')->name('tag.create');
+
+    //Edit Tag by Id
+    Route::get('/tags/edit/{id}', 'App\Http\Controllers\TagController@edit')->name('tag.edit');
+
+    //Save new Tag
+    Route::post('/tags/store', 'App\Http\Controllers\TagController@store')->name('tag.store');
+
+    //Update One Tag
+    Route::put('/tags/update/{tag}', 'App\Http\Controllers\TagController@update')->name('tag.update');
+
+    //Update One Tag Speedly
+    Route::put('/tags/speed/{tag}', 'App\Http\Controllers\TagController@updateSpeed')->name('tag.update.speed');
+
+    //Delete Tag
+    Route::delete('/tags/delete/{tag}', 'App\Http\Controllers\TagController@delete')->name('tag.delete');
+
+});

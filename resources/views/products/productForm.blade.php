@@ -51,6 +51,24 @@
                     </div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="tags" class="form-label">Tags</label>
+                <select class="form-control" name="tags[]" id="tags" multiple>
+                    <option value="" disabled selected>Please, Select Product Tags</option>
+
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}" @if (in_array($tag->id, old('categories', isset($product) ? $product->tags->pluck('id')->toArray() : []))) selected @endif>
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('categories')
+                    <div class="error text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
             <div class="mb-3">
                 <label for="moreDescription" class="form-label">MoreDescription</label>

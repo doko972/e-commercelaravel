@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -80,20 +81,24 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        $tags = Tag::all();
+        return view('products.create', compact('categories', 'tags'));
     }
 
     public function edit($id): View
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
-        return view('products.edit', compact('product', 'categories'));
+        $tags = Tag::all();
+        return view('products.edit', compact('product', 'categories', 'tags'));
     }
 
     public function store(ProductFormRequest $req): RedirectResponse
     {
+        $categories = $req->validated('categories');
+        $tags = $req->validated('tags');
         $data = $req->validated();
-        
+
         // Conversion explicite des booléens
         $data['isAvailable'] = $req->boolean('isAvailable') ? 1 : 0;
         $data['isBestSeller'] = $req->boolean('isBestSeller') ? 1 : 0;
@@ -108,11 +113,17 @@ class ProductController extends Controller
         $product = Product::create($data);
         $product->categories()->sync($req->validated('categories', []));
 
+        if('tags'){
+            $product->tags()->sync($req->validated('tags', []));
+        }
+
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 
     public function update(Product $product, ProductFormRequest $req)
     {
+        $categories = $req->validated('categories');
+        $tags = $req->validated('tags');
         $data = $req->validated();
 
         // Conversion explicite des booléens
@@ -139,6 +150,9 @@ class ProductController extends Controller
 
         $product->update($data);
         $product->categories()->sync($req->validated('categories', []));
+        if('tags'){
+            $product->tags()->sync($req->validated('tags', []));
+        }
 
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }

@@ -35,4 +35,12 @@ class Product extends Model
     {
         return json_decode($this->imageUrls, true) ?? [];
     }
+
+	public function tags()
+	{
+		
+		return $this->belongsToMany(\App\Models\Tag::class);
+	
+	}
+
 }

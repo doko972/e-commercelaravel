@@ -73,17 +73,22 @@ class CategoryController extends Controller
 
     public function updateSpeed(Category $category, Request $req)
     {
-        foreach ($req->all() as $key => $value) {
-            $category->update([
-                $key => $value
-            ]);
+        $data = $req->all();
+    
+        // Vérifier et convertir `isMega`
+        if (isset($data['isMega'])) {
+            $data['isMega'] = filter_var($data['isMega'], FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
         }
-
+    
+        // Mise à jour des champs
+        $category->update($data);
+    
         return [
             'isSuccess' => true,
-            'data' => $req->all()
+            'data' => $data
         ];
     }
+    
 
     public function delete(Category $category)
     {
