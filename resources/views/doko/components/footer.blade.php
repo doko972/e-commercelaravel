@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget">
                         <div class="footer_logo"><a href="#">
-                                <h2>Jstore</h2>
+                                <h2>{{ session()->get('settings')?->name }}</h2>
                             </a></div>
                         <p> Retrouvez tous les accessoires et habits pour femmes, jeunes
                             filles etc... </p>
@@ -72,12 +72,15 @@
                         <h6 class="widget_title">Contact Info</h6>
                         <ul class="contact_info contact_info_light">
                             <li><i class="ti-location-pin"></i>
-                                <p>21 Rue Rubens 59800 Lille</p>
+                                <p>
+                                    {{ session()->get('settings')?->street }}
+                                    {{ session()->get('settings')?->codePostal }}
+                                    {{ session()->get('settings')?->city }}</p>
                             </li>
-                            <li><i class="ti-email"></i><a href="mailto:contact@jstore.fr">contact@jstore.fr</a>
+                            <li><i class="ti-email"></i><a href="mailto:{{ session()->get('settings')?->email }}">{{ session()->get('settings')?->email }}</a>
                             </li>
                             <li><i class="ti-mobile"></i>
-                                <p>+33 7 49 31 69 74</p>
+                                <p>{{ session()->get('settings')?->phone }}</p>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +102,8 @@
                         </li>
                         <li><a href="#"><img src="assets/images/master_card.png" alt="master_card"></a></li>
                         <li><a href="#"><img src="assets/images/paypal.png" alt="paypal"></a></li>
-                        <li><a href="#"><img src="assets/images/amarican_express.png" alt="amarican_express"></a></li>
+                        <li><a href="#"><img src="assets/images/amarican_express.png" alt="amarican_express"></a>
+                        </li>
                     </ul>
                 </div>
             </div>

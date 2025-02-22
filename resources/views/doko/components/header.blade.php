@@ -66,7 +66,9 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg"><a routerlink="/" class="navbar-brand" ng-reflect-router-link="/"
                     href="/">
-                    <h2>Doko</h2>
+                    <h2>
+                        {{ session()->get('settings')?->name }}
+                    </h2>
                 </a><button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-expanded="false" class="navbar-toggler collapsed"><span
                         class="ion-android-menu"></span></button>

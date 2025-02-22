@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Page;
 use App\Models\Category;
 use App\Models\MegaCollection;
+use App\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
 
 class PreloadSessionData
@@ -28,13 +29,14 @@ class PreloadSessionData
                     ->take(4)
                     ->with('products')
                     ->get(),
-                'megacollections' => MegaCollection::all()  // Assurez-vous que cette ligne est présente
+                'megacollections' => MegaCollection::all()
             ];
         });
 
         // Mettre les données dans la session
         Session::put('pages', $pages);
         Session::put('mega_menus', $mega_menus);
+        Session::put('settings', Setting::first());
 
         // Partager les données avec toutes les vues
         view()->share('mega_menus', $mega_menus);
