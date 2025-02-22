@@ -102,8 +102,9 @@
                                                     @foreach ($category->products as $product)
                                                         <li>
                                                             <a class="dropdown-item nav-link nav_item"
-                                                                href="{{ route('product', ['slug' => $product->slug]) }}">
-                                                                {{ $product->name }}
+                                                            href="{{ route('product', ['slug' => $product->slug]) }}">
+                                                            <img src="{{ Storage::url($product->imageUrls()[0])}}" width="25" height="25" alt="">
+                                                            {{ $product->name }}
                                                             </a>
                                                         </li>
                                                     @endforeach

@@ -23,7 +23,7 @@ class ProductController extends Controller
             $products = json_decode($fileContent, true);
 
             foreach ($products as $key => $product) {
-                $imageUrls = array_map(fn ($image) => "images/" . $image, $product["imageUrls"]);
+                $imageUrls = array_map(fn($image) => "images/" . $image, $product["imageUrls"]);
 
                 Product::create([
                     'name' => $product["name"],
@@ -98,6 +98,16 @@ class ProductController extends Controller
         $categories = $req->validated('categories');
         $tags = $req->validated('tags');
         $data = $req->validated();
+        cache()->forget('mega_menus');
+
+
+        cache()->remember('mega_menus', now()->addMinutes(30), function () {
+            return [
+                'categories' => Category::where("isMega", 1)
+                    ->with('products')
+                    ->get(),
+            ];
+        });
 
         // Conversion explicite des booléens
         $data['isAvailable'] = $req->boolean('isAvailable') ? 1 : 0;
@@ -113,7 +123,7 @@ class ProductController extends Controller
         $product = Product::create($data);
         $product->categories()->sync($req->validated('categories', []));
 
-        if('tags'){
+        if ('tags') {
             $product->tags()->sync($req->validated('tags', []));
         }
 
@@ -125,6 +135,15 @@ class ProductController extends Controller
         $categories = $req->validated('categories');
         $tags = $req->validated('tags');
         $data = $req->validated();
+        cache()->forget('mega_menus');
+
+        cache()->remember('mega_menus', now()->addMinutes(30), function () {
+            return [
+                'categories' => Category::where("isMega", 1)
+                    ->with('products')
+                    ->get(),
+            ];
+        });
 
         // Conversion explicite des booléens
         $data['isAvailable'] = $req->boolean('isAvailable') ? 1 : 0;
@@ -150,7 +169,7 @@ class ProductController extends Controller
 
         $product->update($data);
         $product->categories()->sync($req->validated('categories', []));
-        if('tags'){
+        if ('tags') {
             $product->tags()->sync($req->validated('tags', []));
         }
 
@@ -188,6 +207,15 @@ class ProductController extends Controller
         }
 
         $product->delete();
+        cache()->forget('mega_menus');
+
+        cache()->remember('mega_menus', now()->addMinutes(30), function () {
+            return [
+                'categories' => Category::where("isMega", 1)
+                    ->with('products')
+                    ->get(),
+            ];
+        });
         return ['isSuccess' => true];
     }
 
@@ -196,7 +224,7 @@ class ProductController extends Controller
         $uploadedImages = [];
 
         if (!is_array($images)) {
-            $images = [$images]; 
+            $images = [$images];
         }
 
         foreach ($images as $image) {

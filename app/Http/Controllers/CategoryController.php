@@ -46,6 +46,7 @@ class CategoryController extends Controller
         }
 
         $category = Category::create($data);
+        cache()->forget('mega_menus');
 
         return redirect()->route('admin.category.show', ['id' => $category->id]);
     }
@@ -66,6 +67,7 @@ class CategoryController extends Controller
         }
 
         $category->update($data);
+        cache()->forget('mega_menus');
 
         return redirect()->route('admin.category.show', ['id' => $category->id]);
     }
@@ -96,6 +98,7 @@ class CategoryController extends Controller
             Storage::disk('public')->delete($category->imageUrl);
         }
         $category->delete();
+        cache()->forget('mega_menus');
 
         return [
             'isSuccess' => true
