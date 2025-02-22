@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
 
             });
         });
+        View::composer('*', function ($view) {
+            $view->with('mega_menus', session()->get('mega_menus'));
+        });
     }
 
     /**

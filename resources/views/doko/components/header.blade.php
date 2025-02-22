@@ -94,22 +94,26 @@
                                 class="dropdown-toggle nav-link" aria-expanded="false">Products</a>
                             <div class="dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
-                                    @foreach (session()->get('mega_menus')['categories'] as $category)
+                                    @foreach ($mega_menus['categories'] as $category)
                                         <li class="mega-menu-col col-lg-3">
                                             <ul>
-                                                <li class="dropdown-header">{{ $category['name'] }}</li>
-                                                @foreach ($category['products'] as $product)
-                                                    <li>
-                                                    <a class="dropdown-item nav-link nav_item"
-                                                            href="{{ route('product', ['slug' => $product['slug']]) }}">
-                                                            {{ $product['name'] }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-
+                                                <li class="dropdown-header">{{ $category->name }}</li>
+                                                @if($category->products->isNotEmpty())
+                                                    @foreach ($category->products as $product)
+                                                        <li>
+                                                            <a class="dropdown-item nav-link nav_item"
+                                                                href="{{ route('product', ['slug' => $product->slug]) }}">
+                                                                {{ $product->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li><span class="text-muted">Aucun produit disponible</span></li>
+                                                @endif
                                             </ul>
                                         </li>
                                     @endforeach
+
                                 </ul>
                                 <div class="d-lg-flex menu_banners row g-3 px-3">
                                     <div class="col-sm-4">
