@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Page;
+use App\Models\Category;
 use Symfony\Component\HttpFoundation\Response;
 
 class PreloadSessionData
@@ -18,13 +19,15 @@ class PreloadSessionData
     public function handle(Request $request, Closure $next): Response
     {
         $pages = [
-            'headPages' => Page::where("isHead", 1)->get()->toArray(),
-            'footPages' => Page::where("isFoot", 1)->get()->toArray(),
+            'headPages' => Page::where("isHead", 1)->get(),
+            'footPages' => Page::where("isFoot", 1)->get(),
         ];
-        // dd($pages);
+        $mega_menus = [
+            'categories' => Category::where("isMega", 1)->get()
+        ];
         Session::put('pages', $pages);
+        Session::put('mega_menus', $mega_menus);
 
-        // dd(session()->get('pages'));
         return $next($request);
     }
 }
