@@ -253,3 +253,30 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/tags/delete/{tag}', 'App\Http\Controllers\TagController@delete')->name('tag.delete');
 
 });
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Megacollections datas
+    Route::get('/megacollections', 'App\Http\Controllers\MegacollectionController@index')->name('megacollection.index');
+
+    //Show Megacollection by Id
+    Route::get('/megacollections/show/{id}', 'App\Http\Controllers\MegacollectionController@show')->name('megacollection.show');
+
+    //Get Megacollections by Id
+    Route::get('/megacollections/create', 'App\Http\Controllers\MegacollectionController@create')->name('megacollection.create');
+
+    //Edit Megacollection by Id
+    Route::get('/megacollections/edit/{id}', 'App\Http\Controllers\MegacollectionController@edit')->name('megacollection.edit');
+
+    //Save new Megacollection
+    Route::post('/megacollections/store', 'App\Http\Controllers\MegacollectionController@store')->name('megacollection.store');
+
+    //Update One Megacollection
+    Route::put('/megacollections/update/{megacollection}', 'App\Http\Controllers\MegacollectionController@update')->name('megacollection.update');
+
+    //Update One Megacollection Speedly
+    Route::put('/megacollections/speed/{megacollection}', 'App\Http\Controllers\MegacollectionController@updateSpeed')->name('megacollection.update.speed');
+
+    //Delete Megacollection
+    Route::delete('/megacollections/delete/{megacollection}', 'App\Http\Controllers\MegacollectionController@delete')->name('megacollection.delete');
+
+});

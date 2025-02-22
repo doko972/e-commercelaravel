@@ -102,9 +102,10 @@
                                                     @foreach ($category->products as $product)
                                                         <li>
                                                             <a class="dropdown-item nav-link nav_item"
-                                                            href="{{ route('product', ['slug' => $product->slug]) }}">
-                                                            <img src="{{ Storage::url($product->imageUrls()[0])}}" width="25" height="25" alt="">
-                                                            {{ $product->name }}
+                                                                href="{{ route('product', ['slug' => $product->slug]) }}">
+                                                                <img src="{{ Storage::url($product->imageUrls()[0])}}" width="25"
+                                                                    height="25" alt="">
+                                                                {{ $product->name }}
                                                             </a>
                                                         </li>
                                                     @endforeach
@@ -117,36 +118,26 @@
 
                                 </ul>
                                 <div class="d-lg-flex menu_banners row g-3 px-3">
-                                    <div class="col-sm-4">
-                                        <div class="header-banner"><img alt="menu_banner1"
-                                                src="/assets/files/megaCollection/11736749706614988691774027121876766721152610541684827357419.png">
-                                            <div class="banne_info">
-                                                <h6>10% Off</h6>
-                                                <h4>New Arrival</h4><a href="http://localhost:4300/">Shop
-                                                    Now</a>
+                                    @if(isset($mega_menus['megacollections']))
+                                        @foreach ($mega_menus['megacollections'] as $collection)
+                                            <div class="col-sm-4">
+                                                <div class="header-banner">
+                                                    <img alt="{{ $collection->title }}"
+                                                        src="{{ Storage::url($collection->imageUrl) }}">
+                                                    <div class="banne_info">
+                                                        <h6>{{ $collection->description }}</h6>
+                                                        <h4>{{ $collection->title }}</h4>
+                                                        <a
+                                                            href="{{ $collection->buttonLink }}">{{ $collection->buttonText }}</a>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        @endforeach
+                                    @else
+                                        <div class="col-12">
+                                            <p>Aucune collection disponible</p>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner"><img alt="menu_banner1"
-                                                src="/assets/files/megaCollection/8932488097310286313588503554459963159142614451684826970123.png">
-                                            <div class="banne_info">
-                                                <h6>15% Off</h6>
-                                                <h4>Men's Fashion</h4><a href="http://localhost:4300/">Shop
-                                                    Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner"><img alt="menu_banner1"
-                                                src="/assets/files/megaCollection/1412527185807988177642011518607795945067036381684827015102.png">
-                                            <div class="banne_info">
-                                                <h6>23% Off</h6>
-                                                <h4>Kids Fashion</h4><a href="http://localhost:4300/">Shop
-                                                    Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </li>

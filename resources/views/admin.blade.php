@@ -79,11 +79,17 @@
                                 Gestion des Pages
                             </a>
                         </li>
-                    <li class="nav-item">
-    <a class="nav-link" href="{{route('admin.tag.index')}}">
-        Tags
-    </a>
-</li></ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.tag.index')}}">
+                                Tags
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.megacollection.index')}}">
+                                Mega Menu
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 

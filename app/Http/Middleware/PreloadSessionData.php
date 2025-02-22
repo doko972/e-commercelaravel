@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Page;
 use App\Models\Category;
+use App\Models\MegaCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class PreloadSessionData
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $pages = cache()->remember('pages', now()->addMinutes(30), function () {
+        $pages = cache()->remember('pages', now()->addMinutes(1), function () {
             return [
                 'headPages' => Page::where("isHead", 1)->get(),
                 'footPages' => Page::where("isFoot", 1)->get(),
@@ -27,12 +28,16 @@ class PreloadSessionData
                     ->take(4)
                     ->with('products')
                     ->get(),
+                'megacollections' => MegaCollection::all()  // Assurez-vous que cette ligne est présente
             ];
         });
 
+        // Mettre les données dans la session
         Session::put('pages', $pages);
         Session::put('mega_menus', $mega_menus);
-        Session::save();
+
+        // Partager les données avec toutes les vues
+        view()->share('mega_menus', $mega_menus);
 
         return $next($request);
     }
