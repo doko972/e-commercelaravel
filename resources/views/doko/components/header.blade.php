@@ -98,10 +98,10 @@
                                         <li class="mega-menu-col col-lg-3">
                                             <ul>
                                                 <li class="dropdown-header">{{ $category['name'] }}</li>
-                                                @foreach ($category['product'] as $products)
+                                                @foreach ($category['products'] as $product)
                                                     <li>
-                                                        <a class="dropdown-item nav-link nav_item"
-                                                            href="{{ route('products', ['slug' => $products['slug']]) }}">
+                                                    <a class="dropdown-item nav-link nav_item"
+                                                            href="{{ route('product', ['slug' => $product['slug']]) }}">
                                                             {{ $product['name'] }}
                                                         </a>
                                                     </li>

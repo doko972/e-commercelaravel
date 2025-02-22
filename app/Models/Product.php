@@ -29,7 +29,7 @@ class Product extends Model
     public function categories()
     {
         // return $this->belongsToMany(\App\Models\Category::class);
-        return $this->belongsToMany(Category::class, 'product_category');
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     public function imageUrls()
