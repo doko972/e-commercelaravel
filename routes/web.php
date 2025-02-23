@@ -307,3 +307,30 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/settings/delete/{setting}', 'App\Http\Controllers\SettingController@delete')->name('setting.delete');
 
 });
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Socials datas
+    Route::get('/socials', 'App\Http\Controllers\SocialController@index')->name('social.index');
+
+    //Show Social by Id
+    Route::get('/socials/show/{id}', 'App\Http\Controllers\SocialController@show')->name('social.show');
+
+    //Get Socials by Id
+    Route::get('/socials/create', 'App\Http\Controllers\SocialController@create')->name('social.create');
+
+    //Edit Social by Id
+    Route::get('/socials/edit/{id}', 'App\Http\Controllers\SocialController@edit')->name('social.edit');
+
+    //Save new Social
+    Route::post('/socials/store', 'App\Http\Controllers\SocialController@store')->name('social.store');
+
+    //Update One Social
+    Route::put('/socials/update/{social}', 'App\Http\Controllers\SocialController@update')->name('social.update');
+
+    //Update One Social Speedly
+    Route::put('/socials/speed/{social}', 'App\Http\Controllers\SocialController@updateSpeed')->name('social.update.speed');
+
+    //Delete Social
+    Route::delete('/socials/delete/{social}', 'App\Http\Controllers\SocialController@delete')->name('social.delete');
+
+});

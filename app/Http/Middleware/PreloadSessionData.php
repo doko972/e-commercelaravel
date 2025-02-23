@@ -10,6 +10,7 @@ use App\Models\Page;
 use App\Models\Category;
 use App\Models\MegaCollection;
 use App\Models\Setting;
+use App\Models\Social;
 use Symfony\Component\HttpFoundation\Response;
 
 class PreloadSessionData
@@ -37,6 +38,7 @@ class PreloadSessionData
         Session::put('pages', $pages);
         Session::put('mega_menus', $mega_menus);
         Session::put('settings', Setting::first());
+        Session::put('social', Social::all());
 
         // Partager les données avec toutes les vues
         view()->share('mega_menus', $mega_menus);
