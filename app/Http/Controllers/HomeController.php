@@ -47,4 +47,10 @@ class HomeController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
         return view('doko.product', ['product' => $product]);
     }
+
+    public function contact(): view
+    {
+
+        return view('doko.contact');
+    }
 }

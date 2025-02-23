@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('preload.page');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact')->middleware('preload.page');
 Route::get('/page/{page}', [HomeController::class, 'showPage'])->name('page')->middleware('preload.page');
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product')->middleware('preload.page');
 
@@ -332,5 +333,32 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Delete Social
     Route::delete('/socials/delete/{social}', 'App\Http\Controllers\SocialController@delete')->name('social.delete');
+
+});
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Contacts datas
+    Route::get('/contacts', 'App\Http\Controllers\ContactController@index')->name('contact.index');
+
+    //Show Contact by Id
+    Route::get('/contacts/show/{id}', 'App\Http\Controllers\ContactController@show')->name('contact.show');
+
+    //Get Contacts by Id
+    Route::get('/contacts/create', 'App\Http\Controllers\ContactController@create')->name('contact.create');
+
+    //Edit Contact by Id
+    Route::get('/contacts/edit/{id}', 'App\Http\Controllers\ContactController@edit')->name('contact.edit');
+
+    //Save new Contact
+    Route::post('/contacts/store', 'App\Http\Controllers\ContactController@store')->name('contact.store');
+
+    //Update One Contact
+    Route::put('/contacts/update/{contact}', 'App\Http\Controllers\ContactController@update')->name('contact.update');
+
+    //Update One Contact Speedly
+    Route::put('/contacts/speed/{contact}', 'App\Http\Controllers\ContactController@updateSpeed')->name('contact.update.speed');
+
+    //Delete Contact
+    Route::delete('/contacts/delete/{contact}', 'App\Http\Controllers\ContactController@delete')->name('contact.delete');
 
 });
