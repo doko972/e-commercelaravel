@@ -37,11 +37,8 @@ class ContactController extends Controller
     public function store(ContactFormRequest $req): RedirectResponse
     {
         $data = $req->validated();
-
-        
-
         $contact = Contact::create($data);
-        return redirect()->route('admin.contact.show', ['id' => $contact->id]);
+        return redirect()->route('contact')->with('success','Le message à bien été envoyé');
     }
 
     public function update(Contact $contact, ContactFormRequest $req)

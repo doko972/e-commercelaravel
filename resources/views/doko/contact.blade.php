@@ -1,69 +1,71 @@
 @extends('base')
 
 @section('title')
-Contact page | Doko
+    Contact page | Doko
 @endsection
 
 @section('content')
+    @include('doko/components/top-page', ['title' => 'Contact Form'])
 
-@include('doko/components/top-page', ['title'=> 'Contact Form'])
-
-<div class="container">
-
-    <div class="main_content">
-
-        <div class="section pb_70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="contact_wrap contact_style3">
-                            <div class="contact_icon">
-                                <i class="linearicons-map2"></i>
-                            </div>
-                            <div class="contact_text">
-                                <span>Address</span>
-                                <p></p>
+    <div class="container">
+        <div class="main_content">
+            <div class="section pb_70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6">
+                            <div class="contact_wrap contact_style3">
+                                <div class="contact_icon">
+                                    <i class="linearicons-map2"></i>
+                                </div>
+                                <div class="contact_text">
+                                    <span>Address</span>
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="contact_wrap contact_style3">
-                            <div class="contact_icon">
-                                <i class="linearicons-envelope-open"></i>
-                            </div>
-                            <div class="contact_text">
-                                <span>Email Address</span>
-                                <a href="mailto:"> </a>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="contact_wrap contact_style3">
+                                <div class="contact_icon">
+                                    <i class="linearicons-envelope-open"></i>
+                                </div>
+                                <div class="contact_text">
+                                    <span>Email Address</span>
+                                    <a href="mailto:"> </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="contact_wrap contact_style3">
-                            <div class="contact_icon">
-                                <i class="linearicons-tablet2"></i>
-                            </div>
-                            <div class="contact_text">
-                                <span>Phone</span>
-                                <p></p>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="contact_wrap contact_style3">
+                                <div class="contact_icon">
+                                    <i class="linearicons-tablet2"></i>
+                                </div>
+                                <div class="contact_text">
+                                    <span>Phone</span>
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="section pt-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="heading_s1">
-                            <h2>Get In touch</h2>
-                        </div>
-                        <p class="leads">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit
-                            massa
-                            enim. Nullam id varius nunc id varius nunc.</p>
-                        <div class="field_form">
-                            @include('contacts/contactFrontForm')
-                            {{-- <form method="post" name="enq">
+            <div class="section pt-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <div class="heading_s1">
+                                <h2>Envoyer un message</h2>
+                            </div>
+                            <p class="leads">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit
+                                massa
+                                enim. Nullam id varius nunc id varius nunc.</p>
+                            <div class="field_form">
+                                @include('contacts/contactFrontForm')
+                                {{-- <form method="post" name="enq">
                                 <div class="row">
                                     <div class="form-group col-md-6 mb-3">
                                         <input required placeholder="Enter Name *" id="first-name" class="form-control"
@@ -94,16 +96,15 @@ Contact page | Doko
                                     </div>
                                 </div>
                             </form> --}}
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
+
+
         </div>
 
-
     </div>
-
-</div>
-
 @endsection

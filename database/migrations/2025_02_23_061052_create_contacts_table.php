@@ -18,6 +18,7 @@ return new class extends Migration
         	$table->string('subject');
 			$table->text('content');
 			$table->string('phone');
+            $table->boolean('isResponsed')->default(false);
         	$table->timestamps();
         });
     }

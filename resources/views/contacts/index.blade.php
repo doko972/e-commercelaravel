@@ -34,6 +34,7 @@
 						<th scope="col">Subject</th>
 						<th scope="col">Content</th>
 						<th scope="col">Phone</th>
+						<th scope="col">IsResponsed</th>
 						
 						<th scope="col">Actions</th>
                 </tr>
@@ -46,6 +47,11 @@
 							<td>{{ $contact->subject }}</td>
 							<td>{!! $contact->content !!}</td>
 							<td>{{ $contact->phone }}</td>
+							    <td>
+    <div class="form-check form-switch">
+        <input name="isResponsed" id="isResponsed" data-id="{{$contact->id}}" value="true" data-bs-toggle="toggle"  {{ isset($contact) && $contact->isResponsed == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
+    </div>
+</td>
 						<td>
                     <a href="{{ route('admin.contact.show', ['id' => $contact->id]) }}" class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i>

@@ -11,7 +11,6 @@
                     @method('PUT')
                 @endif
                 <div class="mb-3 col-md-6">
-                    <label for="name" class="form-label">Name</label>
                     <input type="text" placeholder="Name ..." name="name"
                         value="{{ old('name', isset($contact) ? $contact->name : '') }}" class="form-control"
                         id="name" aria-describedby="nameHelp" required />
@@ -23,7 +22,6 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="email" class="form-label">Email</label>
                     <input type="text" placeholder="Email ..." name="email"
                         value="{{ old('email', isset($contact) ? $contact->email : '') }}" class="form-control"
                         id="email" aria-describedby="emailHelp" required />
@@ -35,7 +33,6 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="subject" class="form-label">Subject</label>
                     <input type="text" placeholder="Subject ..." name="subject"
                         value="{{ old('subject', isset($contact) ? $contact->subject : '') }}" class="form-control"
                         id="subject" aria-describedby="subjectHelp" required />
@@ -47,7 +44,6 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-md-6">
-                    <label for="phone" class="form-label">Phone</label>
                     <input type="text" placeholder="Phone ..." name="phone"
                         value="{{ old('phone', isset($contact) ? $contact->phone : '') }}" class="form-control"
                         id="phone" aria-describedby="phoneHelp" required />
@@ -59,7 +55,6 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
                     <textarea name="content" class="form-control" id="content" aria-describedby="contentHelp">{{ old('content', isset($contact) ? $contact->content : '') }}</textarea>
 
                     @error('content')
@@ -68,7 +63,9 @@
                         </div>
                     @enderror
                 </div>
-                <button class="btn btn-primary mt-1"> {{ isset($contact) ? 'Update' : 'Create' }}</button>
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary mt-1"> {{ isset($contact) ? 'Update' : 'Create' }}</button>
+                </div>
             </form>
         </div>
     </div>

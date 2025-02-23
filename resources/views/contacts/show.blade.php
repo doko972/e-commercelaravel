@@ -34,6 +34,14 @@
         <th>Phone</th> 
         <td>{{ $contact->phone }}</td>
 </tr>
+    <tr>
+        <th>IsResponsed</th> 
+        <td>
+            <div class="form-check form-switch">
+                <input name="isResponsed" disabled id="isResponsed" value="true" data-bs-toggle="toggle"  {{ $contact->isResponsed == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
+            </div>
+        </td>
+    </tr>
 	
             </tbody>
         </table>

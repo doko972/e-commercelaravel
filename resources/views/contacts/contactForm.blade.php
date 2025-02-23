@@ -52,6 +52,21 @@
                 {{ $message }}
             </div>
         @enderror
+    </div>    <div class="mb-3 d-flex gap-2">
+        <label for="isResponsed" class="form-label">IsResponsed</label>
+        <div class="form-check form-switch">
+            <input name="isResponsed" id="isResponsed" value="true" data-bs-toggle="toggle"  {{ old('isResponsed', isset($contact) && $contact->isResponsed == 'true' ? 'checked' : '') }} class="form-check-input" type="checkbox" role="switch" />
+        </div>
+        {{-- <select class="form-control" name="isResponsed" id="isResponsed">
+            <option value="true" {{ old('isResponsed', isset($contact) && $contact->isResponsed == 'true' ? 'selected' : '') }}>Yes</option>
+            <option value="false" {{ old('isResponsed', isset($contact) && $contact->isResponsed == 'false' ? 'selected' : '') }}>No</option>
+        </select> --}}
+
+        @error('isResponsed')
+            <div class="error text-danger">
+                {{ $message }}
+            </div>
+        @enderror
     </div>    <a href="{{ route('admin.contact.index') }}" class="btn btn-danger mt-1">
         Cancel
     </a>
