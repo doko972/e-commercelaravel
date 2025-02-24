@@ -17,13 +17,14 @@
                             <div class="product_header">
                                 <div class="product_header_left">
                                     <div class="d-flex gap-2 align-items-center">
-                                        <form action="" class="d-flex gap-1">
-                                            <select name="sort" class="form-control form-control-sm">
-                                                <option value="price">Sort by price: low to high</option>
-                                                <option value="price-desc">Sort by price: high to low</option>
-                                            </select>
-                                            <button class="btn btn-success">Rechercher</button>
-                                        </form>
+                                        <select id="sortByPrice" name="sort" class="form-control form-control-sm">
+                                            <option value="price"
+                                                {{ request()->get('sort') === 'price' ? 'selected' : '' }}>Sort by price:
+                                                low to high</option>
+                                            <option value="price-desc"
+                                                {{ request()->get('sort') === 'price-desc' ? 'selected' : '' }}>Sort by
+                                                price: high to low</option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -36,12 +37,15 @@
                                                 class="ti-layout-list-thumb"></i></a>
                                     </div>
                                     <div class="custom_select">
-                                        <select class="form-control form-control-sm">
-                                            <option value="">Showing</option>
-                                            <option value="9">9</option>
-                                            <option value="12">12</option>
-                                            <option value="18">18</option>
-                                        </select>
+                                            <select id="showing" class="form-control form-control-sm" name="showing">
+                                                <option value=""{{ request()->get('showing') === '' ? 'selected' : '' }}>Showing</option>
+                                                <option value="3" {{ request()->get('showing') === '3' ? 'selected' : '' }}>3</option>
+                                                <option value="8" {{ request()->get('showing') === '8' ? 'selected' : '' }}>8</option>
+                                                <option value="12" {{ request()->get('showing') === '12' ? 'selected' : '' }}>12</option>
+                                                <option value="18" {{ request()->get('showing') === '18' ? 'selected' : '' }}>18</option>
+                                                <option value="25" {{ request()->get('showing') === '25' ? 'selected' : '' }}>25</option>
+                                                <option value="50" {{ request()->get('showing') === '50' ? 'selected' : '' }}>50</option>
+                                            </select>
                                     </div>
                                 </div>
                             </div>
@@ -134,4 +138,35 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        const sortByPrice = document.querySelector('#sortByPrice')
+        const showing = document.querySelector('#showing')
+        const datas = [showing, sortByPrice]
+        datas.forEach(data => {
+            data.onchange = (event) => {
+                const {
+                    name,
+                    value
+                } = event.target
+                const urlParams = new URLSearchParams(window.location.search)
+                urlParams.set(name, value)
+                const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
+                window.location.href = newLink
+            }
+            
+        });
+        // showing.onchange = (event) => {
+        //     const {
+        //         name,
+        //         value
+        //     } = event.target
+        //     const urlParams = new URLSearchParams(window.location.search)
+        //     urlParams.set(name, value)
+        //     const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
+        //     window.location.href = newLink
+        // }
+    </script>
 @endsection
