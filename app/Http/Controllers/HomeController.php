@@ -53,4 +53,20 @@ class HomeController extends Controller
 
         return view('doko.contact');
     }
+
+    public function shop(Request $req): View
+    {
+        $sort = $req->input('sort');
+        if ($sort) {
+            $filter = "asc";
+            if ($sort === 'price-desc') {
+                $filter = "desc";
+            }
+            $products = Product::orderBy('soldePrice', $filter)->paginate(8)->onEachSide(3);
+        } else {
+            // onEachSide pour la pagination 3 elements avant et 3 elements apres
+            $products = Product::paginate(8)->onEachSide(3);
+        }
+        return view('doko.shop', ['products' => $products]);
+    }
 }
