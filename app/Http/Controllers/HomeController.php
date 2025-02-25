@@ -73,12 +73,14 @@ class HomeController extends Controller
             $filter = $sort === 'price-desc' ? 'desc' : 'asc';
             $products = $products->orderBy('soldePrice', $filter);
         }
-        if($category_id && is_numeric($category_id)){
-            $category_id = (int)$category_id;
-
-            $products->whereHas('categories', function ($query) use ($category_id) {
-                $query->where('category_id', $category_id);
-            });
+        if(($category_id && is_numeric($category_id)) || $category_id === 'all'){
+            if($category_id !== 'all'){
+                $category_id = (int)$category_id;
+    
+                $products->whereHas('categories', function ($query) use ($category_id) {
+                    $query->where('category_id', $category_id);
+                });
+            }
         }
 
             // onEachSide pour la pagination 3 elements avant et 3 elements apres

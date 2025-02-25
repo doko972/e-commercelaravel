@@ -1,5 +1,15 @@
 @extends('base')
 
+@section('styles')
+<style>
+    .li.active a{
+        background-color: 
+        color: red !important;
+    }
+</style>
+
+@endsection
+
 @section('title')
     Shop | Doko
 @endsection
@@ -76,15 +86,22 @@
                             <h5 class="widget_title">Categories</h5>
                             <ul class="widget_categories">
                                 @foreach ($categories as $category)
-                                    <li>
-                                        <a href="#" class="category-item" data-id="{{ $category->id }}"><span class="categories_name">{{ $category->name }}</span>
+                                    <li class="{{ request()->get('category_id') == $category->id ? 'active' : ''}}">
+                                        <a href="#"  class="category-item" data-id="{{ $category->id }}">
+                                            <span class="categories_name">{{ $category->name }}</span>
                                             <span class="categories_num">{{ $category->products->count() }}</span>
                                         </a>
                                     </li>
                                 @endforeach
+                                <li class="{{ request()->get('category_id') == $category->id ? 'active' : ''}}">
+                                    <a href="#" class="category-item" data-id="all">
+                                        <span class="categories_name">All</span>
+                                        <span class="categories_num">{{ $products->total() }}</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="widget">
+                        {{-- <div class="widget">
                             <h5 class="widget_title">Filter</h5>
                             <div class="filter_price">
                                 <div id="price_filter" data-min="0" data-max="500" data-min-value="50"
@@ -135,7 +152,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -166,14 +183,16 @@
         categoryItems.forEach(category => {
             category.onclick = (event) => {
                 event.preventDefault();
-                let { id } = event.target.dataset
+                let {
+                    id
+                } = event.target.dataset
 
-                if(!id){
+                if (!id) {
                     id = event.target.parentNode.dataset.id;
                 }
-                
-                
-                
+
+
+
                 const urlParams = new URLSearchParams(window.location.search)
                 urlParams.set('category_id', id)
                 const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
