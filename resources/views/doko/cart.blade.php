@@ -38,16 +38,25 @@
                                                     {{ $format_price($item['product']['soldePrice']) }}</td>
                                                 <td data-title="Quantity" class="product-quantity">
                                                     <div class="quantity">
-                                                        <input type="button" value="-" class="minus">
+                                                        <a href="{{ route('cart.remove', [
+                                                            'productId' => $item['product']['id'],
+                                                            'quantity' => 1,
+                                                        ]) }}"
+                                                            class="minus">-</a>
                                                         <input value="{{ $item['quantity'] }}" type="text"
                                                             name="quantity" title="Qty" size="4" class="qty">
-                                                        <input type="button" value="+" class="plus">
+                                                        <a href="{{ route('cart.add', ['productId' => $item['product']['id']]) }}"
+                                                            class="plus">+</a>
                                                     </div>
                                                 </td>
                                                 <td data-title="Total" class="product-subtotal">
                                                     {{ $format_price($item['sub_total']) }}&nbsp;€ </td>
                                                 <td data-title="Remove" class="product-remove">
-                                                    <a href="#">
+                                                    <a
+                                                        href="{{ route('cart.remove', [
+                                                            'productId' => $item['product']['id'],
+                                                            'quantity' => $item['quantity'],
+                                                        ]) }}">
                                                         <i class="ti-close"></i>
                                                     </a>
                                                 </td>
@@ -77,7 +86,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="cart_total_label">Cart Subtotal</td>
-                                                <td class="cart_total_amount">606,99&nbsp;€</td>
+                                                <td class="cart_total_amount">{{ $format_price($cart['sub_total']) }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Shipping</td>
@@ -85,7 +94,8 @@
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Total</td>
-                                                <td class="cart_total_amount"><strong>606,99&nbsp;€</strong></td>
+                                                <td class="cart_total_amount">
+                                                    <strong>{{ $format_price($cart['sub_total']) }}</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
