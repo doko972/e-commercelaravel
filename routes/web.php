@@ -26,6 +26,7 @@ Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('pro
 Route::get('/cart', [CartController::class, 'index'])->name('cart')->middleware('preload.page');
 Route::get('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add')->middleware('preload.page');
 Route::get('/cart/remove/{productId}/{quantity}', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('preload.page');
+Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
 
 // Route::get('/load', [ProductController::class, 'load'])->name('load');
 

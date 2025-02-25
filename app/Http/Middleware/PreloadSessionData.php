@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\CartService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +40,7 @@ class PreloadSessionData
         Session::put('mega_menus', $mega_menus);
         Session::put('settings', Setting::first());
         Session::put('social', Social::all());
+        Session::put('cart_details', (new CartService())->getCartDetails());
 
         // Partager les données avec toutes les vues
         view()->share('mega_menus', $mega_menus);

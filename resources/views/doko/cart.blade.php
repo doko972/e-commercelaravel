@@ -52,11 +52,7 @@
                                                 <td data-title="Total" class="product-subtotal">
                                                     {{ $format_price($item['sub_total']) }}&nbsp;€ </td>
                                                 <td data-title="Remove" class="product-remove">
-                                                    <a
-                                                        href="{{ route('cart.remove', [
-                                                            'productId' => $item['product']['id'],
-                                                            'quantity' => $item['quantity'],
-                                                        ]) }}">
+                                                    <a href="{{ route('cart.remove', ['productId' => $item['product']['id'],'quantity' => $item['quantity']]) }}">
                                                         <i class="ti-close"></i>
                                                     </a>
                                                 </td>

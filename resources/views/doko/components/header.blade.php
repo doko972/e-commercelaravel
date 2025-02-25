@@ -12,7 +12,8 @@
                                     <option value="EUR" data-title="EUR" ng-reflect-value="EUR">EUR</option>
                                     <option value="GBR" data-title="GBR" ng-reflect-value="GBR">GBR</option>
                                 </select></div>
-                            <div class="dd ddcommon borderRadius" id="msdrpdd20_msdd" tabindex="0" style="width: 52px;">
+                            <div class="dd ddcommon borderRadius" id="msdrpdd20_msdd" tabindex="0"
+                                style="width: 52px;">
                                 <div class="ddTitle borderRadiusTp"><span class="divider"></span><span
                                         class="ddArrow arrowoff"></span><span class="ddTitleText "
                                         id="msdrpdd20_title"><span class="ddlabel">USD</span><span class="description"
@@ -100,13 +101,13 @@
                                         <li class="mega-menu-col col-lg-3">
                                             <ul>
                                                 <li class="dropdown-header">{{ $category->name }}</li>
-                                                @if($category->products->isNotEmpty())
+                                                @if ($category->products->isNotEmpty())
                                                     @foreach ($category->products as $product)
                                                         <li>
                                                             <a class="dropdown-item nav-link nav_item"
                                                                 href="{{ route('product', ['slug' => $product->slug]) }}">
-                                                                <img src="{{ Storage::url($product->imageUrls()[0])}}" width="25"
-                                                                    height="25" alt="">
+                                                                <img src="{{ Storage::url($product->imageUrls()[0]) }}"
+                                                                    width="25" height="25" alt="">
                                                                 {{ $product->name }}
                                                             </a>
                                                         </li>
@@ -120,7 +121,7 @@
 
                                 </ul>
                                 <div class="d-lg-flex menu_banners row g-3 px-3">
-                                    @if(isset($mega_menus['megacollections']))
+                                    @if (isset($mega_menus['megacollections']))
                                         @foreach ($mega_menus['megacollections'] as $collection)
                                             <div class="col-sm-4">
                                                 <div class="header-banner">
@@ -153,10 +154,12 @@
                 <ul class="navbar-nav attr-nav align-items-center">
                     <li><a href="javascript:void(0);" class="nav-link search_trigger"><i
                                 class="linearicons-magnifier"></i></a>
-                        <div class="search_wrap"><span class="close-search"><i class="ion-ios-close-empty"></i></span>
+                        <div class="search_wrap"><span class="close-search"><i
+                                    class="ion-ios-close-empty"></i></span>
                             <form novalidate="" class="ng-untouched ng-pristine ng-valid">
-                                <input type="text" placeholder="Search" id="search_input" class="form-control"><button
-                                    type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
+                                <input type="text" placeholder="Search" id="search_input"
+                                    class="form-control"><button type="submit" class="search_icon"><i
+                                        class="ion-ios-search-strong"></i></button>
                             </form>
                         </div>
                         <div class="search_overlay"></div>
@@ -187,60 +190,32 @@
                     </li>
                     <li class="dropdown cart_dropdown"><a href="#" data-bs-toggle="dropdown"
                             class="nav-link cart_trigger"><i class="linearicons-cart"></i><span
-                                class="cart_count">31</span></a>
+                                class="cart_count"> {{ session()->get('cart_details')['cart_count'] ?? 0 }}</span></a>
+
                         <div class="cart_box dropdown-menu dropdown-menu-right">
                             <ul class="cart_list">
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_5/36851533762117856286455670026456984987161761684087224828.webp">Culotte
-                                        en dentelle</a><span class="cart_quantity"> 11 x
-                                        <span class="cart_amount"><span
-                                                class="price_symbole">23,91&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_9/116945623386141314594418897879593148825527931684087225230.webp">Culotte
-                                        unicolore (sans couture)</a><span class="cart_quantity"> 4 x <span
-                                            class="cart_amount"><span
-                                                class="price_symbole">44,54&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_7/825380258783085919054835307976332473139779511684087224936.webp">Culotte
-                                        en dentelle</a><span class="cart_quantity"> 3 x
-                                        <span class="cart_amount"><span
-                                                class="price_symbole">17,17&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/970670668041335927385290724653240714148366921684565574162.webp">Bikini
-                                        unicolore côtelé</a><span class="cart_quantity"> 4
-                                        x <span class="cart_amount"><span
-                                                class="price_symbole">28,24&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_4/87087411019387380483560199609827534551691041684087224752.webp">Culotte
-                                        unicolore femme (sans couture)</a><span class="cart_quantity"> 2 x <span
-                                            class="cart_amount"><span
-                                                class="price_symbole">56,07&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_2/64690629656996101166169787112869964617448491684087224479.webp">Tanga
-                                        unicolore</a><span class="cart_quantity"> 3 x <span class="cart_amount"><span
-                                                class="price_symbole">38,84&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_8/10518988473111520886581236853833613928085898971684087225041.webp">Culotte
-                                        en dentelle</a><span class="cart_quantity"> 1 x
-                                        <span class="cart_amount"><span
-                                                class="price_symbole">58,43&nbsp;€</span></span></span></li>
-                                <li><a href="#" class="item_remove"><i class="ion-close"></i></a><a href="#"><img
-                                            width="50" height="50" alt="cart_thumb1"
-                                            src="/assets/files/culottes/culotte_3/6138170893214881132536005127536132168491807951684087224669.webp">Culotte
-                                        à blocs de couleurs en dentelle</a><span class="cart_quantity"> 3 x <span
-                                            class="cart_amount"><span
-                                                class="price_symbole">54,95&nbsp;€</span></span></span></li>
+                                @if (session()->get('cart_details') && isset(session()->get('cart_details')['items']))
+                                    @foreach (session()->get('cart_details')['items'] as $item)
+                                        <li>
+                                            <a href="#" class="item_remove"><i class="ion-close"></i></a>
+                                            <a href="#">
+                                                <img width="50" height="50" alt="cart_thumb1"
+                                                    src="{{ $get_image($item['product']) }}">
+                                                {{ $item['product']['name'] }}
+                                            </a>
+                                            <span class="cart_quantity"> {{ $item['quantity'] }} x
+                                                <span class="cart_amount">
+                                                    <span
+                                                        class="price_symbole">{{ $format_price($item['product']['soldePrice']) }}</span>
+                                                </span>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                             <div class="cart_footer">
                                 <p class="cart_total"><strong>Subtotal:</strong><span class="cart_price"><span
-                                            class="price_symbole"></span></span>1 057,58&nbsp;€ </p>
+                                            class="price_symbole"></span></span>{{ $format_price(session()->get('cart_details')['sub_total'] ?? 0) }} </p>
                                 <p class="cart_buttons"><a routerlink="/cart" class="btn btn-fill-line view-cart"
                                         ng-reflect-router-link="/cart" href="/cart">View Cart</a><a
                                         routerlink="/checkout" class="btn btn-fill-out checkout"
