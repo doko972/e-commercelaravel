@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Page;
 use App\Models\Collection;
+use App\Models\Category;
 
 
 class HomeController extends Controller
@@ -58,18 +59,31 @@ class HomeController extends Controller
     {
         $sort = $req->input('sort');
         $showing = $req->input('showing');
+        $category_id = $req->input('category_id');
         $pageLimit = 8;
+
         if($showing && is_numeric($showing)){
             $pageLimit = (int)$showing;
         }
+
+        
         $products = Product::query();
+        $categories = Category::all();
         if ($sort) {
             $filter = $sort === 'price-desc' ? 'desc' : 'asc';
             $products = $products->orderBy('soldePrice', $filter);
         }
+        if($category_id && is_numeric($category_id)){
+            $category_id = (int)$category_id;
+
+            $products->whereHas('categories', function ($query) use ($category_id) {
+                $query->where('category_id', $category_id);
+            });
+        }
+
             // onEachSide pour la pagination 3 elements avant et 3 elements apres
             $products = $products->paginate($pageLimit)->onEachSide(1);
         
-        return view('doko.shop', ['products' => $products]);
+        return view('doko.shop', ['products' => $products], ['categories' => $categories]);
     }
 }

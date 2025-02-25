@@ -37,15 +37,22 @@
                                                 class="ti-layout-list-thumb"></i></a>
                                     </div>
                                     <div class="custom_select">
-                                            <select id="showing" class="form-control form-control-sm" name="showing">
-                                                <option value=""{{ request()->get('showing') === '' ? 'selected' : '' }}>Showing</option>
-                                                <option value="3" {{ request()->get('showing') === '3' ? 'selected' : '' }}>3</option>
-                                                <option value="8" {{ request()->get('showing') === '8' ? 'selected' : '' }}>8</option>
-                                                <option value="12" {{ request()->get('showing') === '12' ? 'selected' : '' }}>12</option>
-                                                <option value="18" {{ request()->get('showing') === '18' ? 'selected' : '' }}>18</option>
-                                                <option value="25" {{ request()->get('showing') === '25' ? 'selected' : '' }}>25</option>
-                                                <option value="50" {{ request()->get('showing') === '50' ? 'selected' : '' }}>50</option>
-                                            </select>
+                                        <select id="showing" class="form-control form-control-sm" name="showing">
+                                            <option value=""{{ request()->get('showing') === '' ? 'selected' : '' }}>
+                                                Showing</option>
+                                            <option value="3"
+                                                {{ request()->get('showing') === '3' ? 'selected' : '' }}>3</option>
+                                            <option value="8"
+                                                {{ request()->get('showing') === '8' ? 'selected' : '' }}>8</option>
+                                            <option value="12"
+                                                {{ request()->get('showing') === '12' ? 'selected' : '' }}>12</option>
+                                            <option value="18"
+                                                {{ request()->get('showing') === '18' ? 'selected' : '' }}>18</option>
+                                            <option value="25"
+                                                {{ request()->get('showing') === '25' ? 'selected' : '' }}>25</option>
+                                            <option value="50"
+                                                {{ request()->get('showing') === '50' ? 'selected' : '' }}>50</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -68,16 +75,13 @@
                         <div class="widget">
                             <h5 class="widget_title">Categories</h5>
                             <ul class="widget_categories">
-                                <li><a href="#"><span class="categories_name">Women</span><span
-                                            class="categories_num">(9)</span></a></li>
-                                <li><a href="#"><span class="categories_name">Top</span><span
-                                            class="categories_num">(6)</span></a></li>
-                                <li><a href="#"><span class="categories_name">T-Shirts</span><span
-                                            class="categories_num">(4)</span></a></li>
-                                <li><a href="#"><span class="categories_name">Men</span><span
-                                            class="categories_num">(7)</span></a></li>
-                                <li><a href="#"><span class="categories_name">Shoes</span><span
-                                            class="categories_num">(12)</span></a></li>
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="#" class="category-item" data-id="{{ $category->id }}"><span class="categories_name">{{ $category->name }}</span>
+                                            <span class="categories_num">{{ $category->products->count() }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="widget">
@@ -144,6 +148,7 @@
     <script>
         const sortByPrice = document.querySelector('#sortByPrice')
         const showing = document.querySelector('#showing')
+        const categoryItems = document.querySelectorAll('.category-item')
         const datas = [showing, sortByPrice]
         datas.forEach(data => {
             data.onchange = (event) => {
@@ -156,17 +161,25 @@
                 const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
                 window.location.href = newLink
             }
-            
+
         });
-        // showing.onchange = (event) => {
-        //     const {
-        //         name,
-        //         value
-        //     } = event.target
-        //     const urlParams = new URLSearchParams(window.location.search)
-        //     urlParams.set(name, value)
-        //     const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
-        //     window.location.href = newLink
-        // }
+        categoryItems.forEach(category => {
+            category.onclick = (event) => {
+                event.preventDefault();
+                let { id } = event.target.dataset
+
+                if(!id){
+                    id = event.target.parentNode.dataset.id;
+                }
+                
+                
+                
+                const urlParams = new URLSearchParams(window.location.search)
+                urlParams.set('category_id', id)
+                const newLink = window.location.origin + window.location.pathname + '?' + urlParams.toString()
+                window.location.href = newLink
+            }
+
+        });
     </script>
 @endsection
