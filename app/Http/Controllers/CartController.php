@@ -4,24 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
-    public function index(): View
+    public function index(CartService $cartService): View
     {
-        return view("doko.cart");
-    }
-    public function addToCart(Request $request, $productId): View
-    {
-        $cart = $request->session()->get('cart', []);
-        if(isset($cart[$productId])){
-            $cart[$productId]++;
-        }else{
-            $cart[$productId] = 1;
-        }
-        $request->session()->put('cart', $cart);
+        $cart = $cartService->getCartDetails();
         
-        return view("doko.cart");
+        return view("doko.cart", ["cart"=>$cart]);
+    }
+    public function addToCart(CartService $cartService, $productId): View
+    {
+        $cartService->addToCart($productId, 1);
+        $cart = $cartService->getCartDetails();
+        
+        return view("doko.cart", ["cart"=>$cart]);
     }
 }
 

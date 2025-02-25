@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         // Registering the MakeServiceCommand as a ClosureCommand
         $this->getArtisan()->add(new MakeServiceCommand());
 
+
         require base_path('routes/console.php');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Page;
 use App\Models\Product;use Illuminate\Support\Facades\Session;
 
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with("site_title", function () {
                 return "| " . Session::get('setting')?->name;
+
+            });
+            $view->with("get_image", function ($product) {
+                return Storage::url($product['imageUrls'][0]);
 
             });
         });

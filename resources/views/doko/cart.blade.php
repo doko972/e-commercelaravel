@@ -26,128 +26,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_5/36851533762117856286455670026456984987161761684087224828.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Culotte en dentelle</a></td>
-                                            <td data-title="Price" class="product-price">23.91</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity" title="Qty"
-                                                        size="4" class="qty"><input type="button" value="+"
-                                                        class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                167,37&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_9/116945623386141314594418897879593148825527931684087225230.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Culotte unicolore (sans
-                                                    couture)</a></td>
-                                            <td data-title="Price" class="product-price">44.54</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity" title="Qty"
-                                                        size="4" class="qty"><input type="button" value="+"
-                                                        class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                44,54&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_7/825380258783085919054835307976332473139779511684087224936.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Culotte en dentelle</a></td>
-                                            <td data-title="Price" class="product-price">17.17</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity" title="Qty"
-                                                        size="4" class="qty"><input type="button" value="+"
-                                                        class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                51,51&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/970670668041335927385290724653240714148366921684565574162.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Bikini unicolore côtelé</a>
-                                            </td>
-                                            <td data-title="Price" class="product-price">28.24</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity"
-                                                        title="Qty" size="4" class="qty"><input
-                                                        type="button" value="+" class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                56,48&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_4/87087411019387380483560199609827534551691041684087224752.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Culotte unicolore femme (sans
-                                                    couture)</a></td>
-                                            <td data-title="Price" class="product-price">56.07</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity"
-                                                        title="Qty" size="4" class="qty"><input
-                                                        type="button" value="+" class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                112,14&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_2/64690629656996101166169787112869964617448491684087224479.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Tanga unicolore</a></td>
-                                            <td data-title="Price" class="product-price">38.84</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity"
-                                                        title="Qty" size="4" class="qty"><input
-                                                        type="button" value="+" class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                116,52&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a><img width="50" alt="product1"
-                                                        src="/assets/files/culottes/culotte_8/10518988473111520886581236853833613928085898971684087225041.webp"></a>
-                                            </td>
-                                            <td data-title="Product" class="product-name"><a>Culotte en dentelle</a></td>
-                                            <td data-title="Price" class="product-price">58.43</td>
-                                            <td data-title="Quantity" class="product-quantity">
-                                                <div class="quantity"><input type="button" value="-"
-                                                        class="minus"><input type="text" name="quantity"
-                                                        title="Qty" size="4" class="qty"><input
-                                                        type="button" value="+" class="plus"></div>
-                                            </td>
-                                            <td data-title="Total" class="product-subtotal">
-                                                58,43&nbsp;€ </td>
-                                            <td data-title="Remove" class="product-remove"><a href="#"><i
-                                                        class="ti-close"></i></a></td>
-                                        </tr>
+                                        @foreach ($cart['items'] as $item)
+                                            <tr>
+                                                <td class="product-thumbnail"><a><img width="50" alt="product1"
+                                                            src="{{ $get_image($item['product']) }}"></a>
+                                                </td>
+                                                <td data-title="Product" class="product-name">
+                                                    <a>{{ $item['product']['name'] }}</a>
+                                                </td>
+                                                <td data-title="Price" class="product-price">
+                                                    {{ $format_price($item['product']['soldePrice']) }}</td>
+                                                <td data-title="Quantity" class="product-quantity">
+                                                    <div class="quantity">
+                                                        <input type="button" value="-" class="minus">
+                                                        <input value="{{ $item['quantity'] }}" type="text"
+                                                            name="quantity" title="Qty" size="4" class="qty">
+                                                        <input type="button" value="+" class="plus">
+                                                    </div>
+                                                </td>
+                                                <td data-title="Total" class="product-subtotal">
+                                                    {{ $format_price($item['sub_total']) }}&nbsp;€ </td>
+                                                <td data-title="Remove" class="product-remove">
+                                                    <a href="#">
+                                                        <i class="ti-close"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -184,8 +89,8 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div><a routerlink="/checkout" class="btn btn-fill-out"
-                                    ng-reflect-router-link="/checkout" href="/checkout">Proceed To CheckOut</a>
+                                </div><a routerlink="/checkout" class="btn btn-fill-out" ng-reflect-router-link="/checkout"
+                                    href="/checkout">Proceed To CheckOut</a>
                             </div>
                         </div>
                     </div>
