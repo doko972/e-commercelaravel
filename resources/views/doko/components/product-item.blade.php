@@ -13,7 +13,11 @@
         </a>
         <div class="product_action_box">
             <ul class="list_none pr_action_btn">
-                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart </a>
+                <li class="add-to-cart">
+                    <a href="{{ route('cart.add', ['productId' => $product->id]) }}">
+                        <i class="icon-basket-loaded">
+                        </i> Add To Cart
+                    </a>
                 </li>
                 <li><a href="shop-compare.html"><i class="icon-shuffle"></i></a>
                 </li>
@@ -28,8 +32,8 @@
                 {{ $product->name }}</a>
         </h6>
         <div class="product_price">
-            <span class="price">{{ $format_price($product->soldePrice)}}</span>
-            <del>{{ $format_price($product->regularPrice)}}</del>
+            <span class="price">{{ $format_price($product->soldePrice) }}</span>
+            <del>{{ $format_price($product->regularPrice) }}</del>
             <div class="on_sale"><span>{{ $calculateReduction($product) }}% Off</span></div>
         </div>
         <div class="rating_wrap">

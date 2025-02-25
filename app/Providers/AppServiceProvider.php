@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Page;
-use App\Models\Product;
+use App\Models\Product;use Illuminate\Support\Facades\Session;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with("format_price", function ($soldePrice) {
                 return number_format($soldePrice, 2, ',', ' ') . '€' ;
+
+            });
+            $view->with("site_title", function () {
+                return "| " . Session::get('setting')?->name;
 
             });
         });

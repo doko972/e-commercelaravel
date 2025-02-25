@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Contact page | Doko
+    Contact page {{ "| " . session()->get('settings')?->name }}
 @endsection
 
 @section('content')

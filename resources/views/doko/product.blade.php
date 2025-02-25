@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    {{ $product->name }} | Doko
+    {{ $product->name }} {{ "| " . session()->get('settings')?->name }}
 @endsection
 
 @section('content')

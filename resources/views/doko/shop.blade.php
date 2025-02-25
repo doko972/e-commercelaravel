@@ -11,7 +11,7 @@
 @endsection
 
 @section('title')
-    Shop | Doko
+    Shop {{ "| " . session()->get('settings')?->name }}
 @endsection
 
 @section('content')
